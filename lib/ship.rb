@@ -1,3 +1,5 @@
+require './lib/helper'
+
 class Ship
   attr_accessor :name, :length, :health
   def initialize(name, length)
