@@ -13,8 +13,8 @@ class Cell
     elsif name == 'submarine'
       length = 2
     end
-    @ship = Ship.new(name, length)
     @status = 'S'
+    @ship = Ship.new(name, length)
   end
 
   def empty?

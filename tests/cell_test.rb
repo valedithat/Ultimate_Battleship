@@ -51,12 +51,14 @@ class CellTest < Minitest::Test
   end
 
   def test_render_sunken_ship
+    cell.place_ship('cruiser')
+    cell.ship.hit
     cell.ship.hit
     cell.fire_upon
     assert_equal 'X', cell.render
   end
 
   def test_render_empty
-
+    assert_equal '.', cell.status
   end
 end
