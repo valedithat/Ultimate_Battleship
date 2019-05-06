@@ -2,13 +2,15 @@ require './lib/helper'
 
 class Board
   attr_reader :cells
+
+  include ValidationHelper
+
   def initialize
     @cells = Hash.new
     create_cells
   end
 
   def create_cells
-    # currently producess double a1-d4 ranges
     nums = (1..4).to_a
     letters = ('A'..'D').to_a
     letters.each do |l|
@@ -22,10 +24,14 @@ class Board
   def valid_coordinate?(coordinate)
     @cells.include?(coordinate)
   end
-end
 
-board = Board.new
-puts board.cells
-# puts board.valid_coordinate?("B4")
-# puts board.valid_coordinate?("D4")
-# puts board.valid_coordinate?("D7")
+  def valid_placement?(ship, coordinates)
+    # length of coordinates == Ship.new.length
+    check_ship_length(ship, coordinates.length)
+    # cell in cells is found in @cells
+    check_coordinates_in_range(coordinates)
+    # consequtive
+    check_consequtive_coordinates(coordinates)
+    # coordinates not diagonal
+  end
+end
